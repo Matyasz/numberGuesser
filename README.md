@@ -1,2 +1,4 @@
 # matyasz.github.io
-My website project.
+My online portfolio where I will display my webdev projects.
+
+Contact info: tjmatyasz.gmail.com

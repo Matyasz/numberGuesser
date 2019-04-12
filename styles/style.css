@@ -1,0 +1,68 @@
+html {
+    font-size: 10px;
+    font-family: 'Open Sans', sans-serif;
+
+    height: 100%;
+}
+
+body {
+    background-color: lightsteelblue;
+
+    margin: auto;
+
+    height: 100%;
+    max-width: 800px;
+}
+
+header {
+    /*background: aliceblue;*/
+    background-color: black;
+    opacity: 0.7;
+
+    margin: 0 auto;
+
+    height: 150px;
+    width: 100%;
+}
+
+main {
+    background-color: black;
+    opacity: 0.4;
+
+    margin: 1em auto;
+
+    color: white;
+
+    height: 600px;
+    width: 100%;
+}
+
+footer {
+    background-color: black;
+    opacity: 0.7;
+
+    color: white;
+
+    /*margin: auto;*/
+    /*position: static;*/
+    /*bottom: 0;*/
+    margin: 0 auto;
+
+    width: 100%;
+}
+
+#banner {
+    width: 100%;
+    height: 150px;
+}
+
+#bg-circle {
+    position: absolute;
+    z-index: -1;
+
+
+    height: 100%;
+    width: 100%;
+
+    max-width: 800px;
+}
