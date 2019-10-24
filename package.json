@@ -1,0 +1,27 @@
+{
+  "name": "matyasz.github.io",
+  "version": "1.0.0",
+  "description": "My online portfolio where I will display my webdev projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matyasz/matyasz.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matyasz/matyasz.github.io/issues"
+  },
+  "homepage": "https://github.com/Matyasz/matyasz.github.io#readme",
+  "dependencies": {
+    "d3": "^5.12.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  }
+}
