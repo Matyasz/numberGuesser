@@ -20,8 +20,8 @@ function makeCirclePattern () {
                         .attr("cx", Math.floor((Math.random() * 100) + 1).toString() + "%")
                         .attr("cy", Math.floor((Math.random() * 100) + 1).toString() + "%")
                         .attr("r", Math.floor((Math.random() * 100) + 50).toString())
-                        .attr("fill", "steelblue")
-                        .attr("opacity", 0.8);
+                        .style("fill", "steelblue")
+                        .style("opacity", 0.8);
     }
 }
 
@@ -35,10 +35,9 @@ function addHeaderText (txt) {
                 .attr('y', '90%')
                 .attr('font-family', 'Verdana')
                 .attr('font-size', '25')
-                .attr('fill', 'white')
-                .attr('stroke', 'black')
+                .style('fill', 'white')
+                .style('stroke', 'black')
                 .attr('stroke-width', '0.5')
-                .attr('x', '10%')
                 .text(txt);
 }
 
