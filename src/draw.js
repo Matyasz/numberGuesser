@@ -2,6 +2,15 @@ import * as d3 from 'd3';
 
 
 function drawCanvas (gridSize, pixelSize) {
+    // Make document listen for whether or not the mouse is down
+    window.mouseDown = 0;
+    document.body.onmousedown = function() { 
+        window.mouseDown++;
+    }
+    document.body.onmouseup = function() {
+        window.mouseDown--;
+    }
+
     // Make the background
     var gridBG = d3.select("main").append("svg")
                                   .attr("id", "grid")
@@ -22,7 +31,7 @@ function drawCanvas (gridSize, pixelSize) {
                               .style("width", pixelSize.toString() + "px")
                               .attr("value", 0)
                               .attr("id", i.toString() + "-" + j.toString())
-                              .on("mouseup mouseout mousedown mouseover", colorSwitch);
+                              .on("mouseover", colorSwitch);
         }
     }
 }
@@ -45,12 +54,9 @@ function drawGuess (gridSize, pixelSize) {
 function drawStats (gridSize, pixelSize) {
     var statsBG = d3.select("main").append("svg")
                                    .attr("id", "stats")
-	                           .style("display", "block")
+	                               .style("display", "block")
                                    .style("height", (pixelSize * gridSize).toString() + "px")
                                    .style("width", "100%");
-	                         //  .style("margin", pixelSize.toString() + "px"); 
-	                        // .style("padding", "0px " + pixelSize.toString() + "px " + pixelSize.toString() + "px " + pixelSize.toString() + "px");
-                                // .style("float", "center");
 
     var stats = statsBG.append("rect")
                        .style("fill", "white")
@@ -63,11 +69,13 @@ var colorSwitch = (function (){
     var value = 0;
 
     return function (){
-        pixelColor = pixelColor == "white" ? "black" : "white";
-        value = value == 0 ? 1 : 0;
+        if (window.mouseDown){
+            pixelColor = pixelColor == "white" ? "black" : "white";
+            value = value == 0 ? 1 : 0;
 
-        d3.select(this).style("fill", pixelColor);
-        d3.select(this).attr("value", value);
+            d3.select(this).style("fill", pixelColor);
+            d3.select(this).attr("value", value);
+        }
     }
 })();
 
