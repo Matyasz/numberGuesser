@@ -31,7 +31,7 @@ function drawCanvas (gridSize, pixelSize) {
                               .style("width", pixelSize.toString() + "px")
                               .attr("value", 0)
                               .attr("id", i.toString() + "-" + j.toString())
-                              .on("mouseover", colorSwitch);
+                              .on("mmouseup mousedown mouseover mouseout", colorSwitch);
         }
     }
 }
