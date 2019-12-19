@@ -20,8 +20,8 @@ function drawCanvas (gridSize, pixelSize) {
                                   .style("float", "left");
     
     // Fill the svg with all of the pixels for drawing
-    for (var i = 0; i < gridSize; i++){
-        for (var j = 0; j < gridSize; j++){
+    for (var i = 0; i < gridSize; i++) {
+        for (var j = 0; j < gridSize; j++) {
             var pixel = gridBG.append("rect")
                               .style("fill", "white")
                               .attr("position", "relative")
@@ -30,7 +30,7 @@ function drawCanvas (gridSize, pixelSize) {
                               .style("height", pixelSize.toString() + "px")
                               .style("width", pixelSize.toString() + "px")
                               .attr("value", 0)
-                              .attr("id", i.toString() + "-" + j.toString())
+                              .attr("id", "pix-" + i.toString() + "-" + j.toString())
                               .on("mmouseup mousedown mouseover mouseout", colorSwitch);
         }
     }
@@ -64,6 +64,68 @@ function drawStats (gridSize, pixelSize) {
                        .style("width", "100%");
 }
 
+function placeButtons (gridSize, pixelSize) {
+    var buttonBG = d3.select("main").append("svg")
+                                   .attr("id", "buttons")
+                                   .style("height", (pixelSize * gridSize).toString() + "px")
+                                   .style("width", "180px")
+                                   .style("margin-top", pixelSize.toString() + "px");
+
+    buttonBG.append("rect")
+            .style("fill", "white")
+            .style("height", "100%")
+            .style("width", "100%");
+
+    var guessButton = buttonBG.append("rect")
+                            .style("fill", "steelblue")
+                            .style("stroke", "black")
+                            .attr("y", "112px")
+                            .attr("x", "12px")
+                            .style("height", "50px")
+                            .style("width", "156px")
+                            .on("click", function () { console.log(0); })
+                            .on("mousedown", function () { d3.select(this).style("fill", "lightblue"); })
+                            .on("mouseup", function () { d3.select(this).style("fill", "steelblue"); });
+    
+    var resetButton = buttonBG.append("rect")
+                            .style("fill", "steelblue")
+                            .style("stroke", "black")
+                            .attr("y", "174px")
+                            .attr("x", "12px")
+                            .style("height", "50px")
+                            .style("width", "156px")
+                            .on("click", resetImage)
+                            .on("mousedown", function () { d3.select(this).style("fill", "darkblue"); })
+                            .on("mouseup", function () { d3.select(this).style("fill", "steelblue"); });
+}
+
+function getImage (gridSize) {
+    var image = [];
+
+    for (var i = 0; i < gridSize; i++) {
+        var row = [];
+        
+        for (var j = 0; j < gridSize; j++) {
+            row.push(
+                Number(document.getElementById(i.toString() + "-" + j.toString()).getAttribute("value"))
+            );
+        }
+        image.push(row);
+    }
+
+    return image;
+}
+
+function resetImage () {
+    for (var i = 0; i < 28; i++) {
+        for (var j = 0; j < 28; j++) {
+            d3.select("#pix-" + i.toString() + "-" + j.toString())
+              .attr("value", 0)
+              .style("fill", "white");
+        }
+    }
+}
+
 var colorSwitch = (function (){
     var pixelColor = "white";
     var value = 0;
@@ -79,4 +141,4 @@ var colorSwitch = (function (){
     }
 })();
 
-export {drawCanvas, drawGuess, drawStats};
+export {drawCanvas, drawGuess, drawStats, placeButtons, getImage};
