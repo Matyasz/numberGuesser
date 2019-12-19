@@ -77,26 +77,28 @@ function placeButtons (gridSize, pixelSize) {
             .style("width", "100%");
 
     var guessButton = buttonBG.append("rect")
-                            .style("fill", "steelblue")
-                            .style("stroke", "black")
+                            .style("fill", "lightgrey")
+                            .style("stroke", "darkgrey")
                             .attr("y", "112px")
-                            .attr("x", "12px")
+                            .attr("x", "40px")
                             .style("height", "50px")
-                            .style("width", "156px")
+                            .style("width", "100px")
                             .on("click", function () { console.log(0); })
-                            .on("mousedown", function () { d3.select(this).style("fill", "lightblue"); })
-                            .on("mouseup", function () { d3.select(this).style("fill", "steelblue"); });
+                            .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
+                            .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
+                            .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
     
     var resetButton = buttonBG.append("rect")
-                            .style("fill", "steelblue")
-                            .style("stroke", "black")
+                            .style("fill", "lightgrey")
+                            .style("stroke", "darkgrey")
                             .attr("y", "174px")
-                            .attr("x", "12px")
+                            .attr("x", "40px")
                             .style("height", "50px")
-                            .style("width", "156px")
+                            .style("width", "100px")
                             .on("click", resetImage)
-                            .on("mousedown", function () { d3.select(this).style("fill", "darkblue"); })
-                            .on("mouseup", function () { d3.select(this).style("fill", "steelblue"); });
+                            .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
+                            .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
+                            .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
 }
 
 function getImage (gridSize) {
