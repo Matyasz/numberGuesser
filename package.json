@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Matyasz/matyasz.github.io#readme",
   "dependencies": {
     "@tensorflow/tfjs": "^1.4.0",
+    "body-parser": "^1.19.0",
     "d3": "^5.12.0",
     "express": "^4.17.1"
   },

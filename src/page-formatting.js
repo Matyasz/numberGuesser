@@ -27,9 +27,9 @@ function formatPage (headerText, footerText) {
 
     main.style.backgroundColor = "black";
     main.style.opacity = "0.4";
-    main.style.margin = "1em auto";
+    main.style.margin = "10px auto";
     main.style.color = "white";
-    main.style.height = "auto";
+    main.style.height = "360px";
     main.style.width = "100%";
 
     document.body.appendChild(main);

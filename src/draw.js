@@ -86,7 +86,7 @@ function placeButtons (model) {
                             .attr("x", "40px")
                             .style("height", "50px")
                             .style("width", "100px")
-                            .on("click", function () { console.log(0); })
+                            .on("click", getImage)
                             // .on("click", makePrediction(model))
                             .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
                             .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
@@ -113,7 +113,7 @@ function getImage () {
         
         for (var j = 0; j < PIXEL_COUNT; j++) {
             row.push(
-                Number(document.getElementById(i.toString() + "-" + j.toString()).getAttribute("value"))
+                Number(document.getElementById("pix-" + i.toString() + "-" + j.toString()).getAttribute("value"))
             );
         }
         image.push(row);
