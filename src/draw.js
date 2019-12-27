@@ -1,7 +1,10 @@
 import * as d3 from 'd3';
 
 
-function drawCanvas (gridSize, pixelSize) {
+const PIXEL_SIZE = 12;
+const PIXEL_COUNT = 28;
+
+function drawCanvas () {
     // Make document listen for whether or not the mouse is down
     window.mouseDown = 0;
     document.body.onmousedown = function() { 
@@ -14,21 +17,21 @@ function drawCanvas (gridSize, pixelSize) {
     // Make the background
     var gridBG = d3.select("main").append("svg")
                                   .attr("id", "grid")
-                                  .style("height", (pixelSize * gridSize).toString() + "px")
-                                  .style("width", (pixelSize * gridSize).toString() + "px")
-                                  .style("margin", pixelSize.toString() + "px")
+                                  .style("height", (PIXEL_SIZE * PIXEL_COUNT).toString() + "px")
+                                  .style("width", (PIXEL_SIZE * PIXEL_COUNT).toString() + "px")
+                                  .style("margin", PIXEL_SIZE.toString() + "px")
                                   .style("float", "left");
     
     // Fill the svg with all of the pixels for drawing
-    for (var i = 0; i < gridSize; i++) {
-        for (var j = 0; j < gridSize; j++) {
+    for (var i = 0; i < PIXEL_COUNT; i++) {
+        for (var j = 0; j < PIXEL_COUNT; j++) {
             var pixel = gridBG.append("rect")
                               .style("fill", "white")
                               .attr("position", "relative")
-                              .attr("y", (pixelSize * i).toString() + "px")
-                              .attr("x", (pixelSize * j).toString() + "px")
-                              .style("height", pixelSize.toString() + "px")
-                              .style("width", pixelSize.toString() + "px")
+                              .attr("y", (PIXEL_SIZE * i).toString() + "px")
+                              .attr("x", (PIXEL_SIZE * j).toString() + "px")
+                              .style("height", PIXEL_SIZE.toString() + "px")
+                              .style("width", PIXEL_SIZE.toString() + "px")
                               .attr("value", 0)
                               .attr("id", "pix-" + i.toString() + "-" + j.toString())
                               .on("mmouseup mousedown mouseover mouseout", colorSwitch);
@@ -36,13 +39,13 @@ function drawCanvas (gridSize, pixelSize) {
     }
 }
 
-function drawGuess (gridSize, pixelSize) {
+function drawGuess () {
     var guessBG = d3.select("main").append("svg")
                                    .attr("id", "guess")
-                                   .style("height", (pixelSize * gridSize).toString() + "px")
-                                   .style("width", (pixelSize * gridSize).toString() + "px")
+                                   .style("height", (PIXEL_SIZE * PIXEL_COUNT).toString() + "px")
+                                   .style("width", (PIXEL_SIZE * PIXEL_COUNT).toString() + "px")
                                    .style("margin-right", "0px")
-                                   .style("margin", pixelSize.toString() + "px")
+                                   .style("margin", PIXEL_SIZE.toString() + "px")
                                    .style("float", "right");
 
     var guess = guessBG.append("rect")
@@ -51,11 +54,11 @@ function drawGuess (gridSize, pixelSize) {
                        .style("width", "100%");
 }
 
-function drawStats (gridSize, pixelSize) {
+function drawStats () {
     var statsBG = d3.select("main").append("svg")
                                    .attr("id", "stats")
 	                               .style("display", "block")
-                                   .style("height", (pixelSize * gridSize).toString() + "px")
+                                   .style("height", (PIXEL_SIZE * PIXEL_COUNT).toString() + "px")
                                    .style("width", "100%");
 
     var stats = statsBG.append("rect")
@@ -64,12 +67,12 @@ function drawStats (gridSize, pixelSize) {
                        .style("width", "100%");
 }
 
-function placeButtons (gridSize, pixelSize) {
+function placeButtons (model) {
     var buttonBG = d3.select("main").append("svg")
                                    .attr("id", "buttons")
-                                   .style("height", (pixelSize * gridSize).toString() + "px")
+                                   .style("height", (PIXEL_SIZE * PIXEL_COUNT).toString() + "px")
                                    .style("width", "180px")
-                                   .style("margin-top", pixelSize.toString() + "px");
+                                   .style("margin-top", PIXEL_SIZE.toString() + "px");
 
     buttonBG.append("rect")
             .style("fill", "white")
@@ -84,6 +87,7 @@ function placeButtons (gridSize, pixelSize) {
                             .style("height", "50px")
                             .style("width", "100px")
                             .on("click", function () { console.log(0); })
+                            // .on("click", makePrediction(model))
                             .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
                             .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
                             .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
@@ -101,13 +105,13 @@ function placeButtons (gridSize, pixelSize) {
                             .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
 }
 
-function getImage (gridSize) {
+function getImage () {
     var image = [];
 
-    for (var i = 0; i < gridSize; i++) {
+    for (var i = 0; i < PIXEL_COUNT; i++) {
         var row = [];
         
-        for (var j = 0; j < gridSize; j++) {
+        for (var j = 0; j < PIXEL_COUNT; j++) {
             row.push(
                 Number(document.getElementById(i.toString() + "-" + j.toString()).getAttribute("value"))
             );
@@ -126,6 +130,10 @@ function resetImage () {
               .style("fill", "white");
         }
     }
+}
+
+function makePrediction (model) {
+    console.log('makePrediction()');
 }
 
 var colorSwitch = (function (){

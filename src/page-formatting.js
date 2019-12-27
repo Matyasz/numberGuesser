@@ -1,5 +1,48 @@
 import * as d3 from 'd3';
 
+function formatPage (headerText, footerText) {
+    // Set some basic styling
+    var html = document.getElementsByTagName("html")[0]
+    html.style.fontSize = "10px";
+    html.style.fontFamily = "'Open Sans', sans-serif";
+    html.style.height = "100%"
+
+    document.body.style.backgroundColor = "lightsteelblue";
+    document.body.style.marginLeft = "auto";
+    document.body.style.marginRight = "auto";
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.position = "absolute";
+    document.body.style.height = "100%";
+    document.body.style.width = "900px";
+
+    // Create the header
+    var header = document.createElement('header');
+    document.body.appendChild(header);
+    addHeaderText(headerText);
+
+    // Create the main body element and its content
+    var main = document.createElement('main');
+    main.setAttribute('overflow-y', 'scroll');
+
+    main.style.backgroundColor = "black";
+    main.style.opacity = "0.4";
+    main.style.margin = "1em auto";
+    main.style.color = "white";
+    main.style.height = "auto";
+    main.style.width = "100%";
+
+    document.body.appendChild(main);
+
+    // Create the footer
+    var foot = document.createElement('footer');
+    document.body.appendChild(foot);
+    addFooterText(footerText);
+
+    // Background pattern
+    makeCirclePattern();
+}
+
 function makeCirclePattern () {
     const MAX_CIRCLES = 15;
     const MIN_CIRCLES = 5;
@@ -28,7 +71,13 @@ function makeCirclePattern () {
 function addHeaderText (txt) {
     var head_content = d3.select("header")
                      .append("svg")
-                     .attr('id', 'banner');
+                     .style('width', "100%")
+                     .style("height", "150px")
+                     .style("background-color", "black")
+                     .style("opacity", "0.7")
+                     .style("margin", "0 auto")
+                     .style("height", "150px")
+                     .style("width", "100%");
 
     head_content.append("text")
                 .attr('x', '10%')
@@ -37,8 +86,28 @@ function addHeaderText (txt) {
                 .attr('font-size', '25')
                 .style('fill', 'white')
                 .style('stroke', 'black')
-                .attr('stroke-width', '0.5')
+                .attr('stroke-width', '0.1')
                 .text(txt);
 }
 
-export {makeCirclePattern, addHeaderText};
+function addFooterText (txt) {
+    var foot_content = d3.select("footer")
+                     .append("svg")
+                     .style("width", "100%")
+                     .style("height", "30px")
+                     .style("opacity", "0.7")
+                     .style("color", "white")
+                     .style("margin", "0 auto")
+                     .style("background-color", "black")
+                     .style("text-align", "center");
+
+    foot_content.append("text")
+                .attr('x', '10%')
+                .attr('y', '90%')
+                .attr('font-family', 'Verdana')
+                .attr('font-size', '8')
+                .style('fill', 'white')
+                .text(txt);
+}
+
+export {formatPage};
