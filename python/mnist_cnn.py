@@ -24,9 +24,9 @@ train_images = train_images.reshape(train_images.shape[0], 28, 28, 1)
 test_images = test_images.reshape(test_images.shape[0], 28, 28, 1)
 
 model = keras.Sequential([
-    keras.layers.Conv2D(filters=28, kernel_size=3),
+    keras.layers.Conv2D(filters=28, kernel_size=3, input_shape=(28, 28, 1)),
     keras.layers.MaxPooling2D(pool_size=2),
-    keras.layers.Flatten(input_shape=(28, 28)),
+    keras.layers.Flatten(),
     keras.layers.Dense(128, activation='relu'),
     keras.layers.Dense(10, activation='softmax')
 ])

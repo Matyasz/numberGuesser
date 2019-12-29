@@ -2,15 +2,28 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const tf = require('@tensorflow/tfjs');
+const tfn = require("@tensorflow/tfjs-node");
 
 const app = express();
 
 app.use('/', express.static(path.join(__dirname)));
 
-app.get('/', (req, res) => {
-  // const model = tf.loadLayersModel(path.join(__dirname, 'models', 'model.json'));
-  // console.log(model);
+async function getModel () {
+  var modelPath = path.join(__dirname, 'models', 'model.json');
+  console.log(modelPath);
 
+  const handler = tfn.io.fileSystem("/Users/taylor/Documents/web/matyasz.github.io/models/model.json");
+  // const model = await tf.loadModel(handler);
+
+  const model = await tf.loadLayersModel(handler);
+
+  return model;
+}
+
+m = getModel();
+console.log(m);
+
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 

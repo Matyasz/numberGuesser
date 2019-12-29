@@ -79,6 +79,7 @@ function placeButtons (model) {
             .style("height", "100%")
             .style("width", "100%");
 
+    // Add the button to get prediction
     var guessButton = buttonBG.append("rect")
                             .style("fill", "lightgrey")
                             .style("stroke", "darkgrey")
@@ -92,6 +93,7 @@ function placeButtons (model) {
                             .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
                             .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
     
+    // Add the reset button
     var resetButton = buttonBG.append("rect")
                             .style("fill", "lightgrey")
                             .style("stroke", "darkgrey")
