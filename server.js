@@ -16,6 +16,7 @@ async function getModel () {
   // const model = await tf.loadModel(handler);
 
   const model = await tf.loadLayersModel(handler);
+  console.log("Model Loaded.");
 
   return model;
 }

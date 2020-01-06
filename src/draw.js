@@ -88,7 +88,7 @@ function placeButtons (model) {
                             .style("height", "50px")
                             .style("width", "100px")
                             .on("click", getImage)
-                            // .on("click", makePrediction(model))
+                            // .on("click", makePrediction())
                             .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
                             .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
                             .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
@@ -134,8 +134,14 @@ function resetImage () {
     }
 }
 
-function makePrediction (model) {
+function makePrediction () {
     console.log('makePrediction()');
+}
+
+function sendImageToServer () {
+    var request = new XMLHttpRequest();
+
+    image = getImage();
 }
 
 var colorSwitch = (function (){
