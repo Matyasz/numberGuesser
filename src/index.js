@@ -8,7 +8,7 @@ drawCanvas();
 placeButtons();
 drawGuess();
 
-// drawStats();
+drawStats();
 
 // var image = getImage();
 // console.log(image);

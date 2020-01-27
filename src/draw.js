@@ -58,13 +58,14 @@ function drawStats () {
     var statsBG = d3.select("main").append("svg")
                                    .attr("id", "stats")
 	                               .style("display", "block")
-                                   .style("height", (PIXEL_SIZE * PIXEL_COUNT).toString() + "px")
-                                   .style("width", "100%");
+                                   .style("height", ((PIXEL_SIZE * PIXEL_COUNT) / 2).toString() + "px")
+                                   .style("width", "886px");
 
     var stats = statsBG.append("rect")
                        .style("fill", "white")
                        .style("height", "100%")
-                       .style("width", "100%");
+                       .style("width", "100%")
+                       .attr("x", "12px");
 }
 
 function placeButtons (model) {

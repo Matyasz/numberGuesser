@@ -23,13 +23,12 @@ function formatPage (headerText, footerText) {
 
     // Create the main body element and its content
     var main = document.createElement('main');
-    main.setAttribute('overflow-y', 'scroll');
 
     main.style.backgroundColor = "black";
     main.style.opacity = "0.4";
     main.style.margin = "10px auto";
     main.style.color = "white";
-    main.style.height = "360px";
+    main.style.height = "540px";
     main.style.width = "100%";
 
     document.body.appendChild(main);

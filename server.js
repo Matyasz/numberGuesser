@@ -12,11 +12,7 @@ app.use(bodyParser.json());
 
 async function getModel () {
   var modelPath = path.join(__dirname, 'models', 'model.json');
-  console.log(modelPath);
-
-  const handler = tfn.io.fileSystem("/Users/taylor/Documents/web/matyasz.github.io/models/model.json");
-  // const handler = tfn.io.fileSystem("/home/taylor/Documents/repos/matyasz.github.io/models/model.json");
-
+  const handler = tfn.io.fileSystem(modelPath);
   const model = await tf.loadLayersModel(handler);
 
   return model;
