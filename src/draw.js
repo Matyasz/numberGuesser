@@ -147,6 +147,12 @@ function sendImageToServer () {
     request.open("POST", "/send", true);
     request.setRequestHeader("Content-Type", "application/json");
     request.send(image);
+
+    request.onreadystatechange = function () {
+        if (request.readyState == XMLHttpRequest.DONE) {
+            console.log(request.response)
+        }
+    }
 }
 
 var colorSwitch = (function (){

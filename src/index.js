@@ -7,8 +7,4 @@ formatPage('Taylor Matyasz Webdev Portfolio',
 drawCanvas();
 placeButtons();
 drawGuess();
-
 drawStats();
-
-// var image = getImage();
-// console.log(image);

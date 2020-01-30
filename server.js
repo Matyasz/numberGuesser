@@ -39,14 +39,15 @@ app.post('/send', ((req, res) => {
   var image = req.body.image;
   // console.log(image);
 
-  var prediction = model.predict(tf.tensor([image], [1, 28, 28, 1]), {batchSize: 1});
-  // var prediction = model.predict(image);
-  // console.log(prediction.dataSync());
-  // console.log(prediction.flatten().dataSync());
-  // console.log(prediction.print());
-  console.log(tf.argMax(prediction.flatten()).dataSync()[0]);
+  var modelOutput = model.predict(tf.tensor([image], [1, 28, 28, 1]), {batchSize: 1});
+  // var modelOutput = model.predict(image);
+  // console.log(modelOutput.dataSync());
+  // console.log(modelOutput.flatten().dataSync());
+  // console.log(modelOutput.print());
+  console.log(tf.argMax(modelOutput.flatten()).dataSync()[0]);
 
-  // res.send(prediction);
+  res.send({'prediction': tf.argMax(modelOutput.flatten()).dataSync()[0], 
+            'predVec': modelOutput.flatten().dataSync()});
 }));
 
 app.listen(3000);
