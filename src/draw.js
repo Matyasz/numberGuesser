@@ -79,39 +79,59 @@ function placeButtons (model) {
             .style("fill", "white")
             .style("height", "100%")
             .style("width", "100%");
+    
 
     // Add the button to get prediction
-    var guessButton = buttonBG.append("rect")
-                            .style("fill", "lightgrey")
-                            .style("stroke", "darkgrey")
-                            .attr("y", "112px")
-                            .attr("x", "40px")
-                            .style("height", "50px")
-                            .style("width", "100px")
-                            .on("click", makePrediction)
-                            .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
-                            .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
-                            .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
+    var groupGuess = buttonBG.append('g');
+
+    groupGuess.append("rect")
+        .attr("y", "112px")
+        .attr("x", "40px")
+        .style("height", "50px")
+        .style("width", "100px")
+        .style("fill", "lightgrey")
+        .style("stroke", "darkgrey")
+        .on("click", makePrediction)
+        .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
+        .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
+        .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
     
-    buttonBG.append("text")
+    groupGuess.append("text")
             .text('Guess')
             .attr('font-size', '12')
             .style('fill', 'black')
-            .attr("y", "106px")
-            .attr("x", "40px");
+            .attr("y", "137px")
+            .attr("x", "90px")
+            .style('text-anchor', 'middle')
+            .on("click", makePrediction)
+            .style('alignment-baseline', 'middle')
+            .style('pointer-events', 'none');
     
     // Add the reset button
-    var resetButton = buttonBG.append("rect")
-                            .style("fill", "lightgrey")
-                            .style("stroke", "darkgrey")
-                            .attr("y", "174px")
-                            .attr("x", "40px")
-                            .style("height", "50px")
-                            .style("width", "100px")
-                            .on("click", resetAll)
-                            .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
-                            .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
-                            .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
+    var groupReset = buttonBG.append('g');
+
+    groupReset.append("rect")
+            .style("fill", "lightgrey")
+            .style("stroke", "darkgrey")
+            .attr("y", "174px")
+            .attr("x", "40px")
+            .style("height", "50px")
+            .style("width", "100px")
+            .on("click", resetAll)
+            .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
+            .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
+            .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
+    
+    groupReset.append("text")
+            .text('Reset')
+            .attr('font-size', '12')
+            .style('fill', 'black')
+            .attr("y", "199px")
+            .attr("x", "90px")
+            .style('text-anchor', 'middle')
+            .on("click", resetAll)
+            .style('alignment-baseline', 'middle')
+            .style('pointer-events', 'none');
 }
 
 function getImage () {
