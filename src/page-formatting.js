@@ -101,11 +101,13 @@ function addFooterText (txt) {
                      .style("text-align", "center");
 
     foot_content.append("text")
-                .attr('x', '10%')
-                .attr('y', '90%')
+                .attr('x', '50%')
+                .attr('y', '50%')
                 .attr('font-family', 'Verdana')
-                .attr('font-size', '8')
+                .attr('font-size', '12')
                 .style('fill', 'white')
+                .style('text-anchor', 'middle')
+                .style('alignment-baseline', 'middle')
                 .text(txt);
 }
 

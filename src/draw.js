@@ -93,6 +93,13 @@ function placeButtons (model) {
                             .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
                             .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
     
+    buttonBG.append("text")
+            .text('Guess')
+            .attr('font-size', '12')
+            .style('fill', 'black')
+            .attr("y", "106px")
+            .attr("x", "40px");
+    
     // Add the reset button
     var resetButton = buttonBG.append("rect")
                             .style("fill", "lightgrey")
@@ -101,7 +108,7 @@ function placeButtons (model) {
                             .attr("x", "40px")
                             .style("height", "50px")
                             .style("width", "100px")
-                            .on("click", resetImage)
+                            .on("click", resetAll)
                             .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
                             .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
                             .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
@@ -124,6 +131,11 @@ function getImage () {
     return image;
 }
 
+function resetAll () {
+    resetImage();
+    resetGuess();
+}
+
 function resetImage () {
     for (var i = 0; i < 28; i++) {
         for (var j = 0; j < 28; j++) {
@@ -134,9 +146,14 @@ function resetImage () {
     }
 }
 
+function resetGuess  () {
+    d3.select("[id=prediction]").remove();
+}
+
 function makePrediction () {
     console.log('Making prediction...');
-
+    
+    resetGuess();
     sendImageToServer();
 }
 
@@ -150,7 +167,23 @@ function sendImageToServer () {
 
     request.onreadystatechange = function () {
         if (request.readyState == XMLHttpRequest.DONE) {
-            console.log(request.response)
+            console.log(JSON.parse(request.response)['prediction']);
+            console.log(JSON.parse(request.response)['predVec']);
+
+            var guessBlock = d3.select("[id=guess]");
+            
+            console.log(guessBlock);
+
+            guessBlock.append("text")
+                        .attr('x', '50%')
+                        .attr('y', '50%')
+                        .attr('font-size', '250')
+                        .style('fill', 'black')
+                        .style('opacity', '1.0')
+                        .style('text-anchor', 'middle')
+                        .style('alignment-baseline', 'central')
+                        .attr('id', 'prediction')
+                        .text(JSON.parse(request.response)['prediction'].toString());
         }
     }
 }

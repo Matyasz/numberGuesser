@@ -44,7 +44,8 @@ app.post('/send', ((req, res) => {
   // console.log(modelOutput.dataSync());
   // console.log(modelOutput.flatten().dataSync());
   // console.log(modelOutput.print());
-  console.log(tf.argMax(modelOutput.flatten()).dataSync()[0]);
+  // console.log(tf.argMax(modelOutput.flatten()).dataSync()[0]);
+  // console.log(modelOutput.flatten().dataSync());
 
   res.send({'prediction': tf.argMax(modelOutput.flatten()).dataSync()[0], 
             'predVec': modelOutput.flatten().dataSync()});
