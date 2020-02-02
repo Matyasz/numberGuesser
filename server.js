@@ -34,18 +34,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/send', ((req, res) => {
-  
-
   var image = req.body.image;
-  // console.log(image);
-
   var modelOutput = model.predict(tf.tensor([image], [1, 28, 28, 1]), {batchSize: 1});
-  // var modelOutput = model.predict(image);
-  // console.log(modelOutput.dataSync());
-  // console.log(modelOutput.flatten().dataSync());
-  // console.log(modelOutput.print());
-  // console.log(tf.argMax(modelOutput.flatten()).dataSync()[0]);
-  // console.log(modelOutput.flatten().dataSync());
 
   res.send({'prediction': tf.argMax(modelOutput.flatten()).dataSync()[0], 
             'predVec': modelOutput.flatten().dataSync()});

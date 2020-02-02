@@ -57,7 +57,7 @@ function drawGuess () {
 function drawStats () {
     var statsBG = d3.select("main").append("svg")
                                    .attr("id", "stats")
-	                               .style("display", "block")
+                                   .style("display", "block")
                                    .style("height", ((PIXEL_SIZE * PIXEL_COUNT) / 2).toString() + "px")
                                    .style("width", "886px");
 
@@ -85,16 +85,16 @@ function placeButtons (model) {
     var groupGuess = buttonBG.append('g');
 
     groupGuess.append("rect")
-        .attr("y", "112px")
-        .attr("x", "40px")
-        .style("height", "50px")
-        .style("width", "100px")
-        .style("fill", "lightgrey")
-        .style("stroke", "darkgrey")
-        .on("click", makePrediction)
-        .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
-        .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
-        .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
+            .attr("y", "112px")
+            .attr("x", "40px")
+            .style("height", "50px")
+            .style("width", "100px")
+            .style("fill", "lightgrey")
+            .style("stroke", "darkgrey")
+            .on("click", makePrediction)
+            .on("mouseover", function () { d3.select(this).style("fill", "grey"); })
+            .on("mousedown", function () { d3.select(this).style("fill", "darkgrey"); })
+            .on("mouseup mouseout", function () { d3.select(this).style("fill", "lightgrey"); });
     
     groupGuess.append("text")
             .text('Guess')
@@ -168,6 +168,7 @@ function resetImage () {
 
 function resetGuess  () {
     d3.select("[id=prediction]").remove();
+    d3.selectAll("[id=vector]").remove();
 }
 
 function makePrediction () {
@@ -187,12 +188,18 @@ function sendImageToServer () {
 
     request.onreadystatechange = function () {
         if (request.readyState == XMLHttpRequest.DONE) {
-            console.log(JSON.parse(request.response)['prediction']);
-            console.log(JSON.parse(request.response)['predVec']);
+            // The vector comes from the server as a JSON object,
+            // so we need to turn it into an array first.
+            var vec = JSON.parse(request.response)['predVec'];
+            var arr = [];
+
+            for (var ind in vec){
+                arr.push(vec[ind]);
+            }
+            var max = Math.max(...arr);
+            var arr = arr.map(function(x) { return x / max; });
 
             var guessBlock = d3.select("[id=guess]");
-            
-            console.log(guessBlock);
 
             guessBlock.append("text")
                         .attr('x', '50%')
@@ -204,6 +211,29 @@ function sendImageToServer () {
                         .style('alignment-baseline', 'central')
                         .attr('id', 'prediction')
                         .text(JSON.parse(request.response)['prediction'].toString());
+            
+            var statsBlock = d3.select("[id=stats]");
+
+            statsBlock.selectAll('rect')
+                      .select(function(d, i) {
+                          return null;  // Ignore the white rect already there
+                      })
+                      .data(arr)
+                      .enter()
+                      .append('rect')
+                      .style('display', 'inline-block')
+                      .style('fill', 'black')
+                      .attr('id', 'vector')
+                      .attr('x', function(d, i) {
+                          return (i * (900 / arr.length)) + 24;
+                      })
+                      .attr('y', function(d) {
+                          return 168 - (d * 167);
+                      })
+                      .attr("width", 900 / arr.length - 50)
+                      .attr("height", function(d) {
+                          return (d * 167);
+                      });
         }
     }
 }
