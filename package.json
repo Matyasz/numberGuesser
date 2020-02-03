@@ -1,5 +1,5 @@
 {
-  "name": "matyasz.github.io",
+  "name": "numberguesser",
   "version": "1.0.0",
   "description": "My online portfolio where I will display my webdev projects.",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Matyasz/matyasz.github.io.git"
+    "url": "git+https://github.com/Matyasz/numberGuesser.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Matyasz/matyasz.github.io/issues"
+    "url": "https://github.com/Matyasz/numberGuesser/issues"
   },
-  "homepage": "https://github.com/Matyasz/matyasz.github.io#readme",
+  "homepage": "https://github.com/Matyasz/numberGuesser#readme",
   "dependencies": {
     "@tensorflow/tfjs": "^1.5.1",
     "@tensorflow/tfjs-node": "^1.5.1",
